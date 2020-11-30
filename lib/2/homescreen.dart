@@ -62,6 +62,8 @@ class _HomeScreenState extends State<HomeScreen> {
       } else if (buttonString == "0") {
         if (result.contains("Error")) {
           result = "0";
+        } else {
+          result = result + buttonString;
         }
       } else {
         if (buttonString == "()") {
