@@ -1,4 +1,3 @@
-import 'package:Calculator/2/methods.dart';
 import 'package:Calculator/2/resultDisplay.dart';
 import 'package:Calculator/2/widgets.dart';
 import 'package:flutter/material.dart';
@@ -10,8 +9,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  Methods m = Methods();
-
   String result = "";
   String parenthesis;
   String expression;
@@ -35,6 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
         print("Expression: $expression");
 
         expression = expression.replaceAll("x", "*");
+        expression = expression.replaceAll("÷", "/");
         print("Expression2: $expression");
 
         try {
@@ -60,6 +58,10 @@ class _HomeScreenState extends State<HomeScreen> {
           } else {
             result = "Error";
           }
+        }
+      } else if (buttonString == "0") {
+        if (result.contains("Error")) {
+          result = "0";
         }
       } else {
         if (buttonString == "()") {
@@ -110,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Button("C", buttonPress),
               Button("()", buttonPress),
               Button("<-", buttonPress),
-              Button("/", buttonPress),
+              Button("÷", buttonPress),
             ],
           ),
           Row(
