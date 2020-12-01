@@ -13,6 +13,14 @@ class _HomeScreenState extends State<HomeScreen> {
   String parenthesis;
   String expression;
   bool toggle;
+  bool isFinished = false;
+  String answer;
+
+  clearDisplay() {
+    toggle = false;
+    isFinished = false;
+    answer = "";
+  }
 
   buttonPress(String buttonString) {
     print(buttonString);
@@ -20,10 +28,26 @@ class _HomeScreenState extends State<HomeScreen> {
       //  m.buttonPress(buttonString);
       if (buttonString == "C") {
         result = "";
-        toggle = false;
+        clearDisplay();
       } else if (buttonString == "<-") {
+        if (result.substring(result.length - 1) == "(" ||
+            result.substring(result.length - 1) == ")") {
+          if (parenthesis == "(") {
+            toggle = false;
+          } else if (parenthesis == ")") {
+            toggle = true;
+          }
+        } else {
+          print("Nothing");
+        }
+        print(parenthesis);
+
         result = result.substring(0, result.length - 1);
-        toggleFunction();
+
+        if (answer != "") {
+          result = "";
+        } else {}
+
         if (result == "") {
           result = "";
         }
@@ -36,7 +60,6 @@ class _HomeScreenState extends State<HomeScreen> {
         print("Expression2: $expression");
 
         try {
-          String answer;
           Parser parser = Parser();
           Expression exp = parser.parse(expression);
 
@@ -59,6 +82,8 @@ class _HomeScreenState extends State<HomeScreen> {
             result = "Error";
           }
         }
+        toggle = false;
+        isFinished = true;
       } else if (buttonString == "0") {
         if (result.contains("Error")) {
           result = "0";
@@ -88,17 +113,31 @@ class _HomeScreenState extends State<HomeScreen> {
         } else if (result == "0") {
           result = buttonString;
         } else {
-          result = result + buttonString;
+          if (result.contains("Error")) {
+            result = buttonString;
+          } else if (result != "" && isFinished == true) {
+            result = buttonString;
+            clearDisplay();
+          } else {
+            result = result + buttonString;
+          }
+          // result = result + buttonString;
+
         }
       }
     });
   }
 
   toggleFunction() {
-    if (toggle == true) {
-      toggle = false;
-    } else {
-      toggle = true;
+    print("toggleFunction");
+    if (result == "") {
+      if (toggle == true) {
+        toggle = false;
+        parenthesis = ")";
+      } else {
+        toggle = true;
+        parenthesis = "(";
+      }
     }
   }
 
