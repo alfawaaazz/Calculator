@@ -22,6 +22,8 @@ environment:
 
 dependencies:
   math_expressions: ^2.0.1
+  flutter_bloc: ^6.1.1
+  bloc: ^6.1.0
   flutter:
     sdk: flutter
   
