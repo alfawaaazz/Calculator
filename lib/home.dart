@@ -136,7 +136,7 @@ class _HomeState extends State<Home> {
               buttonWidget(text: "C", buttonPress: () => clrPress()),
               buttonWidget(text: "( )", buttonPress: () => otherOp()),
               buttonWidget(text: "<-", buttonPress: () => deleteLast()),
-              buttonWidget(text: "/", buttonPress: () => oprPress("/")),
+              buttonWidget(text: "÷", buttonPress: () => oprPress("/")),
             ],
           ),
           Row(
