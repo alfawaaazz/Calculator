@@ -7,16 +7,16 @@ import 'package:math_expressions/math_expressions.dart';
 import 'package:provider/provider.dart';
 
 class CalculatorBlocScreen extends StatefulWidget {
-  //CalculatorBlocScreen({@required this.bloc});
-  // final CalculatorBlocTest bloc;
+  CalculatorBlocScreen({@required this.bloc});
+  final CalculatorBlocTest bloc;
 
   static Widget create(BuildContext context) {
     return Provider<CalculatorBlocTest>(
       create: (_) => CalculatorBlocTest(),
       child: Consumer<CalculatorBlocTest>(
         builder: (_, bloc, __) => CalculatorBlocScreen(
-            //bloc: bloc,
-            ),
+          bloc: bloc,
+        ),
       ),
       dispose: (_, bloc) => bloc.dispose(),
     );
@@ -27,49 +27,49 @@ class CalculatorBlocScreen extends StatefulWidget {
 }
 
 class _CalculatorBlocScreenState extends State<CalculatorBlocScreen> {
-  CalculatorBlocTest bloc = CalculatorBlocTest();
+ 
   Widget _buildContent(CalculatorModel model) {
     return Column(
       children: [
         ResultDisplay(model.result),
         Row(
           children: [
-            Button("C", bloc.buttonPress),
-            Button("()", bloc.buttonPress),
-            Button("<-", bloc.buttonPress),
-            Button("÷", bloc.buttonPress),
+            Button("C", widget.bloc.buttonPress),
+            Button("()", widget.bloc.buttonPress),
+            Button("<-", widget.bloc.buttonPress),
+            Button("÷", widget.bloc.buttonPress),
           ],
         ),
         Row(
           children: [
-            Button("7", bloc.buttonPress),
-            Button("8", bloc.buttonPress),
-            Button("9", bloc.buttonPress),
-            Button("x", bloc.buttonPress),
+            Button("7", widget.bloc.buttonPress),
+            Button("8", widget.bloc.buttonPress),
+            Button("9", widget.bloc.buttonPress),
+            Button("x", widget.bloc.buttonPress),
           ],
         ),
         Row(
           children: [
-            Button("4", bloc.buttonPress),
-            Button("5", bloc.buttonPress),
-            Button("6", bloc.buttonPress),
-            Button("-", bloc.buttonPress),
+            Button("4", widget.bloc.buttonPress),
+            Button("5", widget.bloc.buttonPress),
+            Button("6", widget.bloc.buttonPress),
+            Button("-", widget.bloc.buttonPress),
           ],
         ),
         Row(
           children: [
-            Button("1", bloc.buttonPress),
-            Button("2", bloc.buttonPress),
-            Button("3", bloc.buttonPress),
-            Button("+", bloc.buttonPress),
+            Button("1", widget.bloc.buttonPress),
+            Button("2", widget.bloc.buttonPress),
+            Button("3", widget.bloc.buttonPress),
+            Button("+", widget.bloc.buttonPress),
           ],
         ),
         Row(
           children: [
-            Button("00", bloc.buttonPress),
-            Button("0", bloc.buttonPress),
-            Button(".", bloc.buttonPress),
-            Button("=", bloc.buttonPress),
+            Button("00", widget.bloc.buttonPress),
+            Button("0", widget.bloc.buttonPress),
+            Button(".", widget.bloc.buttonPress),
+            Button("=", widget.bloc.buttonPress),
           ],
         ),
       ],
@@ -79,7 +79,7 @@ class _CalculatorBlocScreenState extends State<CalculatorBlocScreen> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<CalculatorModel>(
-      stream: bloc.modelStream,
+      stream: widget.bloc.modelStream,
       initialData: CalculatorModel(),
       builder: (context, snapshot) {
         final CalculatorModel model = snapshot.data;
